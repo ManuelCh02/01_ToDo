@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import { AddTaskModal } from "./AddTaskModal.jsx"
 
-export function AddTaskBtn () {
+export function AddTaskBtn ({ useLocalStorage }) {
     const [modal, setModal] = useState(false)
 
     return (
@@ -10,7 +10,11 @@ export function AddTaskBtn () {
             <button onClick={() => setModal(true)} >
                 + Add Task
             </button>
-            <AddTaskModal isOpen={modal} onClose={() => setModal(false)}/>
+            <AddTaskModal 
+                isOpen={modal} 
+                onClose={() => setModal(false)}
+                useLocalStorage={useLocalStorage}    
+            />
         </>
     )
 }

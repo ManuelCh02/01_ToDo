@@ -1,10 +1,21 @@
-export function TasksList () {
+import { useEffect, useState } from "react"
+
+export function TasksList ({ tasks }) {
+    let tasksList = JSON.parse(localStorage.getItem('tasks'))
+
+    useEffect(() => {
+        tasksList = tasks
+    }, [tasks])
+
+
     return (
         <section>
             <ul>
-                <li>Item 1</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
+                {
+                    tasksList.map(task => (
+                        <li>{task}</li>
+                    ))
+                }
             </ul>
         </section>
     )

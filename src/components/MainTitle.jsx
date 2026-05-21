@@ -1,9 +1,11 @@
 import { AddTaskBtn } from "./AddTaskBtn.jsx"
 
+import styles from "../styles/MainTitle.module.css"
+
 export function MainTitle ({ useLocalStorage }) {
     return (
-        <section>
-            <h2>Selected Label Here</h2>
+        <section className={styles.mainTitle}>
+            <h2>College</h2>
             <AddTaskBtn useLocalStorage={useLocalStorage} />
         </section>
     )

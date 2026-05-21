@@ -1,0 +1,24 @@
+:root {
+    --elevated-card: rgb(35, 35, 40);
+}
+
+.tasksListContainer {
+    width: 100%;
+
+    & .tasksList {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        & .taskElement {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px;
+            background: var(--elevated-card);
+            border-radius: 12px;
+            font-family: inherit;
+            font-family: 1rem;
+        }
+    }
+}

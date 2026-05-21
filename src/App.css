@@ -1,0 +1,34 @@
+:root {
+    --main-background: rgb(13, 13, 15);
+    --primary-card-background: rgb(26, 26, 30);
+    --primary-text: rgb(255, 255, 255);
+}
+
+.app {
+    padding: 16px 0;
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--primary-text);
+    background: var(--main-background);
+
+    & .main-content {
+        width: 325px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary-card-background);
+        border-radius: 16px;
+    }
+
+    & .aside-content {
+        padding: 12px;
+        background: var(--primary-card-background);
+        border-radius: 16px;
+    }
+}

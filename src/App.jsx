@@ -6,12 +6,18 @@ import { Main } from './components/Main.jsx'
 import './App.css'
 
 function App() {
-  const [storedTasks, setStoredTasks] = useState([])
+  const [storedTasks, setStoredTasks] = useState()
 
 
-  function useLocalStorage(value) {
+  function useLocalStorage(task) {
+    const newTask = {
+      id: crypto.randomUUID(),
+      value: task.value,
+      labels: task.labels
+    }
+
     const stored = JSON.parse(localStorage.getItem('tasks') || '[]')
-    stored.push(value)
+    stored.push(newTask)
 
     localStorage.setItem('tasks', JSON.stringify(stored))
 

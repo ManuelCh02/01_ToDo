@@ -1,17 +1,28 @@
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 import { DeleteTask } from "./DeleteTask.jsx"
 
 import styles from "../styles/TasksList.module.css"
 
-export function TasksList ({tasks, colors, deleteTaskFromlocal}) {
+export function TasksList ({tasks, colors, deleteTaskFromlocal, handleTaskCounter}) {
     let tasksList = JSON.parse(localStorage.getItem('tasks')) || []
+    const [taskCounter, setTaskCounter] = useState({
+        numberOfTasks: tasksList.length,
+        tasksCompleted: 0
+    })
 
     useEffect(() => {
         tasksList = tasks
     }, [tasks])
 
     const [taskToDelete, setTaskToDelete] = useState(null)
+
+    const handleToggleCheck = (checked) => {
+        const updated = {...taskCounter, tasksCompleted: checked ? taskCounter.tasksCompleted + 1 : taskCounter.tasksCompleted - 1
+    }
+    setTaskCounter(updated)
+    handleTaskCounter(updated)
+    }
 
     return (
         <section className={styles.tasksListContainer}>
@@ -26,6 +37,7 @@ export function TasksList ({tasks, colors, deleteTaskFromlocal}) {
                                 <input 
                                     type="checkbox" 
                                     className={styles.checkBox}
+                                    onChange={(e) => handleToggleCheck(e.target.checked)}
                                 />
                                 <span className={styles.task}>{task.value}</span>
                             </div>

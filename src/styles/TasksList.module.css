@@ -19,6 +19,32 @@
             border-radius: 12px;
             font-family: inherit;
             font-family: 1rem;
+
+            & .checkAndTask {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                & .checkBox {
+                    appearance: none;
+                    width: 20px;
+                    height: 20px;
+                    border: 2px solid #71717a;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    border-radius: 50%;
+                }
+
+                & .task {
+                    color: #fff;
+                }
+            }
         }
     }
+}
+
+.checkBox:checked {
+    background: #22c55e;
+    border: none;
+    outline: none;
 }

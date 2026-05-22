@@ -28,7 +28,13 @@ function App() {
     setStoredTasks(stored)
   }
 
+  function deleteTaskFromlocal (taskId) {
+    const getLocalStorage = JSON.parse(localStorage.getItem('tasks') || '[]')
+    const updatedTasks = getLocalStorage.filter(task => task.id !== taskId)
 
+    setStoredTasks(updatedTasks)
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks))
+  }
 
   return (
     <div className='app'>
@@ -37,6 +43,7 @@ function App() {
         useLocalStorage={useLocalStorage}
         tasksList={storedTasks}
         colors={svgStyles}
+        deleteTaskFromlocal={deleteTaskFromlocal}
       />
     </div>
   )

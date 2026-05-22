@@ -6,8 +6,8 @@ import { Main } from './components/Main.jsx'
 import './App.css'
 
 function App() {
-  const colors = {
-    mutedForeground: "#71717a"
+  const svgStyles = {
+    color: "#71717a"
   }
 
   const [storedTasks, setStoredTasks] = useState()
@@ -36,7 +36,7 @@ function App() {
       <Main 
         useLocalStorage={useLocalStorage}
         tasksList={storedTasks}
-        colors={colors}
+        colors={svgStyles}
       />
     </div>
   )

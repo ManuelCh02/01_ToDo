@@ -4,7 +4,7 @@ import { AddTaskModal } from "./AddTaskModal.jsx"
 
 import styles from "../styles/addTaskBtn.module.css"
 
-export function AddTaskBtn ({ useLocalStorage }) {
+export function AddTaskBtn ({ useLocalStorage, svgStyles }) {
     const [modal, setModal] = useState(false)
 
     return (
@@ -19,6 +19,7 @@ export function AddTaskBtn ({ useLocalStorage }) {
                 isOpen={modal} 
                 onClose={() => setModal(false)}
                 useLocalStorage={useLocalStorage}    
+                svgStyles={svgStyles}
             />
         </>
     )

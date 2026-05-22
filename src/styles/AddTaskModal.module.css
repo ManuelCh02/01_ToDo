@@ -1,0 +1,72 @@
+.taskModalContainer {
+    width: 325px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: center;
+
+    & .inputTask {
+        width: 100%;  
+        max-width: 300px;
+        padding: 16px;
+        background: rgb(35, 35, 40);
+        border: 1px solid rgb(42, 42, 48);
+        border-radius: 16px;
+        color: #fff;
+        field-sizing: content;
+        resize: none;
+    }
+
+    & .btnContainer {
+        width: 100%;
+        display: flex;
+        gap: 16px;
+        justify-content: space-between;
+
+        & button {
+            width: 100%;
+            border: 1px solid rgb(42, 42, 48);
+        }
+    }
+
+    & .taskListContainer {
+        width: 100%;
+
+        & .taskList {
+            padding-left: 0px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+
+            & .taskItem {
+                padding: 8px;
+                border: 1px solid rgb(42, 42, 48);
+                border-radius: 16px;
+                display: flex;
+                gap: 8px;
+                color: rgb(113, 113, 122);
+                font-size: 1rem;
+                transition: 150ms;
+            }
+        }
+    }
+}
+
+
+.inputTask:focus-visible {
+    outline: 1px solid #3b82f6;
+}
+
+.taskItemActive {
+    padding: 8px;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 16px;
+    display: flex;
+    gap: 8px;
+    color: rgb(255, 255, 255);
+    font-size: 1rem;
+    transition: 150ms;
+}

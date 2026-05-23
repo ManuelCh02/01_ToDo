@@ -8,6 +8,7 @@
     border-radius: 16px;
 
     & .searchTaskInput {
+        width: 100%;
         background: #232328;
         font-size: 1rem;
         border: none;

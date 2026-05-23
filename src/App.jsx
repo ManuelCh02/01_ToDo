@@ -16,13 +16,16 @@ function App() {
   const [filteredTasks, setFilteredTasks] = useState([])
   const [storedTasks, setStoredTasks] = useState()
   const [dbTasks, setDbTasks] = useState([])
-  const [totalTasks, setTotalTasks] = useState(0)
+  let [totalTasks, setTotalTasks] = useState({
+    completed: 0,
+    total: 0
+  })
 
   useEffect(() => {
     const loadTasks = async () => {
     const result = await getTable()
       setDbTasks(result.rows)
-      setTotalTasks(result.rows.length)
+      setTotalTasks({ completed: 0, total: result.rows.length })
     }
 
     loadTasks()
@@ -32,12 +35,14 @@ function App() {
     await saveTask(task)              
     const result = await getTable()   
     setDbTasks(result.rows)
+    setTotalTasks(totalTasks.total += 1)
   }
 
   async function deleteTaskFromlocal (taskId) {
      await deleteTask(taskId)          
       const result = await getTable()
       setDbTasks(result.rows)
+      setTotalTasks(totalTasks.total -= 1)
   }
 
   const handleTaskSearching = (input) => {
@@ -49,11 +54,15 @@ function App() {
     }
 
 
-    const result = storedTasks.filter(task => {
+    const result = dbTasks.filter(task => {
       return task.value.trim().toLowerCase().includes(cleanInput)
     })
 
     setFilteredTasks(result)
+  }
+
+  const handleTaskCounter = (count) => {
+    setTotalTasks(prev => ({ ...prev, completed: count }))
   }
 
   return (
@@ -69,6 +78,7 @@ function App() {
         colors={svgStyles}
         deleteTaskFromlocal={deleteTaskFromlocal}
         totalTasks={totalTasks}
+        handleTaskCounter={handleTaskCounter}
       />
     </div>
   )

@@ -5,23 +5,13 @@ import { DeleteTask } from "./DeleteTask.jsx"
 import styles from "../styles/TasksList.module.css"
 
 export function TasksList ({tasks, colors, deleteTaskFromlocal, handleTaskCounter}) {
-
-    useEffect(() => {
-
-    }, [tasks])
-
-    const [taskCounter, setTaskCounter] = useState({
-        numberOfTasks: 0,
-        tasksCompleted: 0
-    })
-
+    let [taskCounter, setTaskCounter] = useState(0)
     const [taskToDelete, setTaskToDelete] = useState(null)
 
-    const handleToggleCheck = (checked) => {
-        const updated = {...taskCounter, tasksCompleted: checked ? taskCounter.tasksCompleted + 1 : taskCounter.tasksCompleted - 1
-    }
-    setTaskCounter(updated)
-    handleTaskCounter(updated)
+    const handleToggleCheck = (checked) => {   
+        if (checked) setTaskCounter(taskCounter += 1)
+        if (!checked) setTaskCounter(taskCounter -= 1)
+        handleTaskCounter(taskCounter)
     }
 
     return (

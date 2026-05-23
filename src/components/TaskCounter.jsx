@@ -1,12 +1,12 @@
 import styles from "../styles/TaskCounter.module.css"
 
-export function TaskCounter ({completedTasks}) {
-    console.log(completedTasks)
+export function TaskCounter ({totalTasks}) {
+    console.log(totalTasks)
 
     return (
         <section className={styles.counterContainer}>
             <p>
-                COMPLETED {completedTasks.tasksCompleted}/{completedTasks.numberOfTasks}
+                COMPLETED 0/{totalTasks}
             </p>
         </section>
     )

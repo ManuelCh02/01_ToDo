@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 
 import { SideBar } from './components/SideBar.jsx'
 import { Main } from './components/Main.jsx'
+
+import { initDb } from './data/tasks.js'
+import { getTable, saveTask, deleteTask } from './data/queries.js'
 
 import './App.css'
 
@@ -10,40 +13,31 @@ function App() {
     color: "#71717a"
   }
 
-  const [storedTasks, setStoredTasks] = useState(() => {
-    return JSON.parse(localStorage.getItem('tasks') || '[]')
-  })
-
   const [filteredTasks, setFilteredTasks] = useState([])
+  const [storedTasks, setStoredTasks] = useState()
+  const [dbTasks, setDbTasks] = useState([])
+  const [totalTasks, setTotalTasks] = useState(0)
 
   useEffect(() => {
-    const getStorage = JSON.parse(localStorage.getItem('tasks'))
-
-    if (!getStorage || !getStorage.length) localStorage.setItem('tasks', JSON.stringify([]))
-  }, [])
-
-
-  function useLocalStorage(task) {
-    const newTask = {
-      id: crypto.randomUUID(),
-      value: task.value,
-      labels: task.labels
+    const loadTasks = async () => {
+    const result = await getTable()
+      setDbTasks(result.rows)
+      setTotalTasks(result.rows.length)
     }
 
-    const stored = JSON.parse(localStorage.getItem('tasks') || '[]')
-    stored.push(newTask)
+    loadTasks()
+    }, [])
 
-    localStorage.setItem('tasks', JSON.stringify(stored))
-
-    setStoredTasks(stored)
+  const useLocalStorage = async (task) => {
+    await saveTask(task)              
+    const result = await getTable()   
+    setDbTasks(result.rows)
   }
 
-  function deleteTaskFromlocal (taskId) {
-    const getLocalStorage = JSON.parse(localStorage.getItem('tasks') || '[]')
-    const updatedTasks = getLocalStorage.filter(task => task.id !== taskId)
-
-    setStoredTasks(updatedTasks)
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks))
+  async function deleteTaskFromlocal (taskId) {
+     await deleteTask(taskId)          
+      const result = await getTable()
+      setDbTasks(result.rows)
   }
 
   const handleTaskSearching = (input) => {
@@ -71,9 +65,10 @@ function App() {
       />
       <Main 
         useLocalStorage={useLocalStorage}
-        tasksList={storedTasks}
+        tasksList={dbTasks}
         colors={svgStyles}
         deleteTaskFromlocal={deleteTaskFromlocal}
+        totalTasks={totalTasks}
       />
     </div>
   )

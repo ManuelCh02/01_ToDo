@@ -5,15 +5,14 @@ import styles from "../styles/AddTaskModal.module.css"
 export function AddTaskModal ({ isOpen, onClose, useLocalStorage, svgStyles }) {
     if (!isOpen) return null
 
-    const [taskValue, setTaskValue] = useState({ value: "", labels: [] })
+    const [taskValue, setTaskValue] = useState({ value: "", labels: [], completed: false })
  
     const handleAddTaskBtn = (taskValue) => {
         const newTask = {
             value: taskValue.value,
-            labels: taskValue.labels
+            labels: taskValue.labels,
+            completed: false
         }
-
-        console.log(newTask)
 
         useLocalStorage(newTask)
     }

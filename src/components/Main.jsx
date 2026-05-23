@@ -4,17 +4,7 @@ import { MainTitle } from "./MainTitle.jsx";
 import { TasksList } from "./TasksList.jsx";
 import { TaskCounter } from "./TaskCounter.jsx";
 
-export function Main ({ useLocalStorage, tasksList, colors, deleteTaskFromlocal}) {
-
-    const [completedTasks, setCompletedTasks] = useState({
-        numberOfTasks: 0,
-        tasksCompleted: 0
-    })
-
-    useEffect(() => {
-        const stored = JSON.parse(localStorage.getItem('tasks') || '[]')
-        setCompletedTasks(prev => ({ ...prev, numberOfTasks: stored.length }))
-    }, [])
+export function Main ({ useLocalStorage, tasksList, colors, deleteTaskFromlocal, totalTasks}) {
 
     const handleTaskCounter = (counter) => {
         setCompletedTasks(counter)
@@ -29,7 +19,7 @@ export function Main ({ useLocalStorage, tasksList, colors, deleteTaskFromlocal}
                 deleteTaskFromlocal={deleteTaskFromlocal}
                 handleTaskCounter={handleTaskCounter}
             />
-            <TaskCounter completedTasks={completedTasks} />
+            <TaskCounter totalTasks={totalTasks} />
         </main>
     )
 }

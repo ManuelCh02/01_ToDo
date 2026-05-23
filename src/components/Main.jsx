@@ -12,8 +12,9 @@ export function Main ({ useLocalStorage, tasksList, colors, deleteTaskFromlocal}
     })
 
     useEffect(() => {
-        completedTasks.numberOfTasks = JSON.parse(localStorage.getItem('tasks')).length
-    })
+        const stored = JSON.parse(localStorage.getItem('tasks') || '[]')
+        setCompletedTasks(prev => ({ ...prev, numberOfTasks: stored.length }))
+    }, [])
 
     const handleTaskCounter = (counter) => {
         setCompletedTasks(counter)

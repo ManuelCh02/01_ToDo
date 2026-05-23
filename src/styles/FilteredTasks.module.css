@@ -1,0 +1,47 @@
+.filteredTaskContainer {
+    width: 100%;
+
+    & .filteredTasks {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        & .filteredTaskElement {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px;
+            background: var(--elevated-card);
+            border-radius: 12px;
+            font-family: inherit;
+            font-family: 1rem;
+
+            & .filteredCheckElements {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                & .checkBox {
+                    appearance: none;
+                    width: 20px;
+                    height: 20px;
+                    border: 2px solid #71717a;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    border-radius: 50%;
+                }
+
+                & .task {
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+.checkBox:checked {
+    background: #22c55e;
+    border: none;
+    outline: none;
+}
+

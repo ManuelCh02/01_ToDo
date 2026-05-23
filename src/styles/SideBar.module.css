@@ -1,0 +1,11 @@
+.asideContainer {
+    width: 325px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background: var(--primary-card-background);
+    border-radius: 16px;
+}

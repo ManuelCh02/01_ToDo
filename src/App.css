@@ -25,10 +25,4 @@
         background: var(--primary-card-background);
         border-radius: 16px;
     }
-
-    & .aside-content {
-        padding: 12px;
-        background: var(--primary-card-background);
-        border-radius: 16px;
-    }
 }

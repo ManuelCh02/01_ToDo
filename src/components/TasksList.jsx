@@ -5,16 +5,11 @@ import { DeleteTask } from "./DeleteTask.jsx"
 import styles from "../styles/TasksList.module.css"
 
 export function TasksList ({tasks, colors, deleteTaskFromlocal, handleTaskCounter}) {
-
-    let tasksList = JSON.parse(localStorage.getItem('tasks')) || []
+    console.log(tasks)
     const [taskCounter, setTaskCounter] = useState({
-        numberOfTasks: tasksList.length,
+        numberOfTasks: 0,
         tasksCompleted: 0
     })
-
-    useEffect(() => {
-        tasksList = tasks
-    }, [tasks])
 
     const [taskToDelete, setTaskToDelete] = useState(null)
 
@@ -29,7 +24,7 @@ export function TasksList ({tasks, colors, deleteTaskFromlocal, handleTaskCounte
         <section className={styles.tasksListContainer}>
             <ul className={styles.tasksList}>
                 {
-                    tasksList.map(task => (
+                    (tasks || []).map(task => (
                         <li 
                             key={task.id} 
                             className={styles.taskElement}

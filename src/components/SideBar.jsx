@@ -1,10 +1,21 @@
+import { useEffect } from "react";
+
 import { SearchTaskBar } from "./SearchTaskBar.jsx";
 import { LabelTaskList } from "./LabelTaskList.jsx";
+import { FilteredTasks } from "./FilteredTasks.jsx";
 
-export function SideBar () {
+import styles from "../styles/SideBar.module.css"
+
+export function SideBar ({handleTaskSearching, tasks, deleteTaskFromlocal}) {
     return (
-        <aside className="aside-content">
-            <SearchTaskBar />
+        <aside className={styles.asideContainer}>
+            <SearchTaskBar 
+                handleTaskSearching={handleTaskSearching}
+            />
+            <FilteredTasks 
+                tasks={tasks}
+                deleteTaskFromlocal={deleteTaskFromlocal}
+            />
             <LabelTaskList />
         </aside>
     )

@@ -1,0 +1,27 @@
+.taskBarContainer {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #232328;
+    border: 1px solid #2a2a30;
+    border-radius: 16px;
+
+    & .searchTaskInput {
+        background: #232328;
+        font-size: 1rem;
+        border: none;
+        color: #fff;
+        font-size: 1rem;
+    }
+}
+
+.searchTaskInput:focus-visible {
+    border: none;
+    outline: none;
+}
+
+.taskBarContainer:focus-within {
+    border: 1px solid #3b82f6;
+    transition: 125ms;
+}

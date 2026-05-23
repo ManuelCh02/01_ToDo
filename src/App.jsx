@@ -10,13 +10,17 @@ function App() {
     color: "#71717a"
   }
 
-  const [storedTasks, setStoredTasks] = useState()
+  const [storedTasks, setStoredTasks] = useState(() => {
+    return JSON.parse(localStorage.getItem('tasks') || '[]')
+  })
+
+  const [filteredTasks, setFilteredTasks] = useState([])
 
   useEffect(() => {
     const getStorage = JSON.parse(localStorage.getItem('tasks'))
 
     if (!getStorage || !getStorage.length) localStorage.setItem('tasks', JSON.stringify([]))
-  })
+  }, [])
 
 
   function useLocalStorage(task) {
@@ -27,9 +31,9 @@ function App() {
     }
 
     const stored = JSON.parse(localStorage.getItem('tasks') || '[]')
-    const updateStoredData = stored.push(newTask)
+    stored.push(newTask)
 
-    localStorage.setItem('tasks', JSON.stringify(updateStoredData))
+    localStorage.setItem('tasks', JSON.stringify(stored))
 
     setStoredTasks(stored)
   }
@@ -42,9 +46,29 @@ function App() {
     localStorage.setItem('tasks', JSON.stringify(updatedTasks))
   }
 
+  const handleTaskSearching = (input) => {
+    const cleanInput = input.trim().toLowerCase()
+
+    if (!cleanInput) {
+      setFilteredTasks([])
+      return
+    }
+
+
+    const result = storedTasks.filter(task => {
+      return task.value.trim().toLowerCase().includes(cleanInput)
+    })
+
+    setFilteredTasks(result)
+  }
+
   return (
     <div className='app'>
-      <SideBar />
+      <SideBar 
+        handleTaskSearching={handleTaskSearching}
+        tasks={filteredTasks}
+        deleteTaskFromlocal={deleteTaskFromlocal}
+      />
       <Main 
         useLocalStorage={useLocalStorage}
         tasksList={storedTasks}

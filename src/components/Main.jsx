@@ -7,7 +7,7 @@ import { TaskCounter } from "./TaskCounter.jsx";
 export function Main ({ useLocalStorage, tasksList, colors, deleteTaskFromlocal}) {
 
     const [completedTasks, setCompletedTasks] = useState({
-        completedTasks: 0,
+        numberOfTasks: 0,
         tasksCompleted: 0
     })
 

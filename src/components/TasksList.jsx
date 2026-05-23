@@ -5,6 +5,7 @@ import { DeleteTask } from "./DeleteTask.jsx"
 import styles from "../styles/TasksList.module.css"
 
 export function TasksList ({tasks, colors, deleteTaskFromlocal, handleTaskCounter}) {
+
     let tasksList = JSON.parse(localStorage.getItem('tasks')) || []
     const [taskCounter, setTaskCounter] = useState({
         numberOfTasks: tasksList.length,

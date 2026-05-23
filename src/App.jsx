@@ -12,6 +12,12 @@ function App() {
 
   const [storedTasks, setStoredTasks] = useState()
 
+  useEffect(() => {
+    const getStorage = JSON.parse(localStorage.getItem('tasks'))
+
+    if (!getStorage || !getStorage.length) localStorage.setItem('tasks', JSON.stringify([]))
+  })
+
 
   function useLocalStorage(task) {
     const newTask = {
@@ -21,9 +27,9 @@ function App() {
     }
 
     const stored = JSON.parse(localStorage.getItem('tasks') || '[]')
-    stored.push(newTask)
+    const updateStoredData = stored.push(newTask)
 
-    localStorage.setItem('tasks', JSON.stringify(stored))
+    localStorage.setItem('tasks', JSON.stringify(updateStoredData))
 
     setStoredTasks(stored)
   }

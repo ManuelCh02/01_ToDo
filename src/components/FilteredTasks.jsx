@@ -24,7 +24,7 @@ export function FilteredTasks ({tasks, deleteTaskFromlocal}) {
                                     className={styles.checkBox}
                                     // onChange={(e) => handleToggleCheck(e.target.checked)}
                                 />
-                                <span className={styles.task}>{task.value}</span>
+                                <span className={styles.task, "taskItem"}>{task.value}</span>
                             </div>
                             <button 
                                 command="show-modal" 

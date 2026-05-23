@@ -8,7 +8,7 @@ import styles from "../styles/SideBar.module.css"
 
 export function SideBar ({handleTaskSearching, tasks, deleteTaskFromlocal}) {
     return (
-        <aside className={styles.asideContainer}>
+        <aside className={styles.asideContainer, "side-content"}>
             <SearchTaskBar 
                 handleTaskSearching={handleTaskSearching}
             />
@@ -16,7 +16,7 @@ export function SideBar ({handleTaskSearching, tasks, deleteTaskFromlocal}) {
                 tasks={tasks}
                 deleteTaskFromlocal={deleteTaskFromlocal}
             />
-            <LabelTaskList />
+            {/* <LabelTaskList /> */}
         </aside>
     )
 }

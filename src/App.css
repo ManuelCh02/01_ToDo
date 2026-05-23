@@ -7,6 +7,7 @@
 .app {
     padding: 16px 0;
     width: 100%;
+    min-height: 100vh;
     display: flex;
     gap: 16px;
     flex-direction: column-reverse;
@@ -24,5 +25,51 @@
         justify-content: center;
         background: var(--primary-card-background);
         border-radius: 16px;
+    }
+}
+
+.taskItem {
+    width: 100%;
+    text-align:left ;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+@media (max-width: 767px) {
+    .app {
+        padding: 12px;
+        width: 100%;
+        gap: 36px;
+
+        & .main-content {
+            width: 100%;
+        }
+
+        & .side-content {
+            width: 100%;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .app {
+        min-width: 768px;
+        padding: 24px;
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+        gap: 16px;
+
+        & .main-content {
+            width: 100%;
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .app {
+        padding: 32px;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 }

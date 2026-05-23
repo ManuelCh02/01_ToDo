@@ -8,11 +8,11 @@
   box-sizing: border-box;
 }
 
-
-body {
+html, body, #root {
+  height: 100%;
   margin: 0;
   font-weight: 400;
-  height: 100vh;
+  background: rgb(13, 13, 15);
 }
 
 h1, h2 {

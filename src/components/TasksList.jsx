@@ -35,8 +35,8 @@ export function TasksList ({tasks, colors, deleteTaskFromlocal, handleTaskCounte
                                     className={styles.checkBox}
                                     onChange={(e) => handleToggleCheck(e.target.checked)}
                                 />
-                                <span className={styles.task}>{task.value}</span>
                             </div>
+                            <p className={styles.task, "taskItem"}>{task.value}</p>
                             <button 
                                 command="show-modal" 
                                 commandfor="my-dialog"

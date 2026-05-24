@@ -41,6 +41,12 @@
     }
 }
 
+.checkBoxChecked {
+    background: #22c55e;
+    border: none;
+    outline: none;
+}
+
 .checkBox:checked {
     background: #22c55e;
     border: none;

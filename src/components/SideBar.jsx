@@ -6,7 +6,7 @@ import { FilteredTasks } from "./FilteredTasks.jsx";
 
 import styles from "../styles/SideBar.module.css"
 
-export function SideBar ({handleTaskSearching, tasks, deleteTaskFromlocal}) {
+export function SideBar ({handleTaskSearching, tasks, deleteTaskFromlocal, handleToggleCheck}) {
     return (
         <aside className={styles.asideContainer, "side-content"}>
             <SearchTaskBar 
@@ -15,6 +15,7 @@ export function SideBar ({handleTaskSearching, tasks, deleteTaskFromlocal}) {
             <FilteredTasks 
                 tasks={tasks}
                 deleteTaskFromlocal={deleteTaskFromlocal}
+                handleToggleCheck={handleToggleCheck}
             />
             {/* <LabelTaskList /> */}
         </aside>

@@ -4,7 +4,7 @@ import styles from "../styles/FilteredTasks.module.css"
 
 import { DeleteTask } from "./DeleteTask.jsx"
 
-export function FilteredTasks ({tasks, deleteTaskFromlocal}) {
+export function FilteredTasks ({tasks, deleteTaskFromlocal, handleToggleCheck}) {
     if (!tasks || tasks.length === 0) return null
 
     const [taskToDelete, setTaskToDelete] = useState(null)
@@ -20,11 +20,12 @@ export function FilteredTasks ({tasks, deleteTaskFromlocal}) {
                         >
                             <div className={styles.filteredCheckElements}>
                                 <input 
-                                    type="checkbox" 
+                                    type="checkbox"
+                                    checked={task.completed ? true : false} 
                                     className={styles.checkBox}
-                                    // onChange={(e) => handleToggleCheck(e.target.checked)}
+                                    onChange={(e) => handleToggleCheck(e.target.checked, task.id)}
                                 />
-                                <span className={styles.task, "taskItem"}>{task.value}</span>
+                                <p className={styles.task, "taskItem"}>{task.value}</p>
                             </div>
                             <button 
                                 command="show-modal" 

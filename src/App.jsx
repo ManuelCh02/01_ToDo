@@ -65,8 +65,7 @@ function App() {
   const totalCount = dbTasks.length
 
   const handleToggleCheck = async (checked, id) => {
-    updateCompletedQuery(checked, id)
-    await await updateCompletedQuery(checked, id)
+    await updateCompletedQuery(checked, id)
     const result = await getTable() 
     setDbTasks(result.rows)   
   }
@@ -77,6 +76,7 @@ function App() {
         handleTaskSearching={handleTaskSearching}
         tasks={filteredTasks}
         deleteTaskFromlocal={deleteTaskFromlocal}
+        handleToggleCheck={handleToggleCheck}
       />
       <Main 
         useLocalStorage={useLocalStorage}

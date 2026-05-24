@@ -4,14 +4,13 @@ import { DeleteTask } from "./DeleteTask.jsx"
 
 import styles from "../styles/TasksList.module.css"
 
-export function TasksList ({tasks, colors, deleteTaskFromlocal, handleTaskCounter}) {
+export function TasksList ({tasks, colors, deleteTaskFromlocal, handleTaskCounter, handleToggleCheck}) {
     let [taskCounter, setTaskCounter] = useState(0)
     const [taskToDelete, setTaskToDelete] = useState(null)
 
-    const handleToggleCheck = (checked) => {   
+    const handleToggleCounter = (checked) => {
         if (checked) setTaskCounter(taskCounter += 1)
         if (!checked) setTaskCounter(taskCounter -= 1)
-        handleTaskCounter(taskCounter)
     }
 
     return (
@@ -26,8 +25,9 @@ export function TasksList ({tasks, colors, deleteTaskFromlocal, handleTaskCounte
                             <div className={styles.checkAndTask}>
                                 <input 
                                     type="checkbox" 
+                                    checked={task.completed ? true : false}
                                     className={styles.checkBox}
-                                    onChange={(e) => handleToggleCheck(e.target.checked)}
+                                    onChange={(e) => {handleToggleCounter(e.target.checked); handleToggleCheck(e.target.checked, task.id)}}
                                 />
                             </div>
                             <p className={styles.task, "taskItem"}>{task.value}</p>

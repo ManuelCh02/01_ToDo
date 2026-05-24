@@ -4,7 +4,7 @@ import { SideBar } from './components/SideBar.jsx'
 import { Main } from './components/Main.jsx'
 
 import { initDb } from './data/tasks.js'
-import { getTable, saveTask, deleteTask } from './data/queries.js'
+import { getTable, saveTask, deleteTask, updateCompletedQuery } from './data/queries.js'
 
 import './App.css'
 
@@ -16,33 +16,33 @@ function App() {
   const [filteredTasks, setFilteredTasks] = useState([])
   const [storedTasks, setStoredTasks] = useState()
   const [dbTasks, setDbTasks] = useState([])
-  let [totalTasks, setTotalTasks] = useState({
-    completed: 0,
-    total: 0
-  })
+  let [totalTasks, setTotalTasks] = useState({})
 
   useEffect(() => {
     const loadTasks = async () => {
-    const result = await getTable()
-      setDbTasks(result.rows)
-      setTotalTasks({ completed: 0, total: result.rows.length })
+        const result = await getTable()
+        setDbTasks(result.rows)
+        setTotalTasks({
+            total: result.rows.length,
+            completed: result.rows.filter(task => task.completed === 1).length // 👈
+        })
     }
 
     loadTasks()
-    }, [])
+}, [])
 
   const useLocalStorage = async (task) => {
     await saveTask(task)              
     const result = await getTable()   
     setDbTasks(result.rows)
-    setTotalTasks(totalTasks.total += 1)
+    setTotalTasks(prev => ({ ...prev, total: prev.total + 1 }))
   }
 
   async function deleteTaskFromlocal (taskId) {
      await deleteTask(taskId)          
       const result = await getTable()
       setDbTasks(result.rows)
-      setTotalTasks(totalTasks.total -= 1)
+      setTotalTasks(prev => ({ ...prev, total: prev.total - 1 }))
   }
 
   const handleTaskSearching = (input) => {
@@ -61,8 +61,14 @@ function App() {
     setFilteredTasks(result)
   }
 
-  const handleTaskCounter = (count) => {
-    setTotalTasks(prev => ({ ...prev, completed: count }))
+  const completedCount = dbTasks.filter(task => task.completed === 1).length
+  const totalCount = dbTasks.length
+
+  const handleToggleCheck = async (checked, id) => {
+    updateCompletedQuery(checked, id)
+    await await updateCompletedQuery(checked, id)
+    const result = await getTable() 
+    setDbTasks(result.rows)   
   }
 
   return (
@@ -77,8 +83,8 @@ function App() {
         tasksList={dbTasks}
         colors={svgStyles}
         deleteTaskFromlocal={deleteTaskFromlocal}
-        totalTasks={totalTasks}
-        handleTaskCounter={handleTaskCounter}
+        totalTasks={{ total: totalCount, completed: completedCount }}
+        handleToggleCheck={handleToggleCheck}
       />
     </div>
   )

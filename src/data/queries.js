@@ -23,3 +23,10 @@ export const deleteTask = async (taskId) => {
         args: [taskId]
     })
 }
+
+export const updateCompletedQuery = async (checked, taskId) => {
+    await client.execute({
+        sql: `UPDATE todo_tasks SET completed = ? WHERE id = ?`,
+        args: [checked ? 1 : 0, taskId]
+    })
+}

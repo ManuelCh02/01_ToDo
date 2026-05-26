@@ -30,3 +30,13 @@ export const updateCompletedQuery = async (checked, taskId) => {
         args: [checked ? 1 : 0, taskId]
     })
 }
+
+export const filterTasksByLabel = async (value) => {
+    if (value === 'all') return await client.execute({
+        sql: `SELECT * FROM todo_tasks`,
+    })
+    return await client.execute({
+        sql: `SELECT * FROM todo_tasks WHERE labels LIKE ?`,
+        args: [`%${value}%`]
+    })
+}

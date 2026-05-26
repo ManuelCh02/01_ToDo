@@ -4,7 +4,7 @@ import { SideBar } from './components/SideBar.jsx'
 import { Main } from './components/Main.jsx'
 
 import { initDb } from './data/tasks.js'
-import { getTable, saveTask, deleteTask, updateCompletedQuery } from './data/queries.js'
+import { getTable, saveTask, deleteTask, updateCompletedQuery, filterTasksByLabel } from './data/queries.js'
 
 import './App.css'
 
@@ -70,6 +70,11 @@ function App() {
     setDbTasks(result.rows)   
   }
 
+  const getTasksByLabel = async (value) => {
+    const result = await filterTasksByLabel(value)
+    setDbTasks(result.rows)
+  } 
+
   return (
     <div className='app'>
       <SideBar 
@@ -85,6 +90,7 @@ function App() {
         deleteTaskFromlocal={deleteTaskFromlocal}
         totalTasks={{ total: totalCount, completed: completedCount }}
         handleToggleCheck={handleToggleCheck}
+        getTasksByLabel={getTasksByLabel}
       />
     </div>
   )

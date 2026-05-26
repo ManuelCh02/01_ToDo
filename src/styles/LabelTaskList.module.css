@@ -1,0 +1,51 @@
+.labelTasksContainer {
+    width: 100%;
+
+    & .labelTasksLists {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 8px;
+
+        & .listItem{
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #71717a;
+            cursor: pointer;
+            border-radius: 16px;
+
+            & .listItemText {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+li:hover {
+    background: #232328;
+    transition: 250ms;
+}
+
+.listItemActive {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 16px;
+    background: #232328;
+
+    & .listItemText {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1rem;
+    }
+}

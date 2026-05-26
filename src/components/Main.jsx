@@ -4,7 +4,7 @@ import { MainTitle } from "./MainTitle.jsx";
 import { TasksList } from "./TasksList.jsx";
 import { TaskCounter } from "./TaskCounter.jsx";
 
-export function Main ({ useLocalStorage, tasksList, colors, deleteTaskFromlocal, totalTasks, handleTaskCounter, handleToggleCheck, getTasksByLabel}) {
+export function Main ({ useLocalStorage, tasksList, colors, deleteTaskFromlocal, totalTasks, handleTaskCounter, handleToggleCheck, getTasksByLabel, setVisualTag}) {
 
     return (
         <main className="main-content">
@@ -19,6 +19,7 @@ export function Main ({ useLocalStorage, tasksList, colors, deleteTaskFromlocal,
                 deleteTaskFromlocal={deleteTaskFromlocal}
                 handleTaskCounter={handleTaskCounter}
                 handleToggleCheck={handleToggleCheck}
+                setVisualTag={setVisualTag}
             />
             <TaskCounter totalTasks={totalTasks} />
         </main>

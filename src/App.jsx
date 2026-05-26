@@ -4,7 +4,7 @@ import { SideBar } from './components/SideBar.jsx'
 import { Main } from './components/Main.jsx'
 
 import { initDb } from './data/tasks.js'
-import { getTable, saveTask, deleteTask, updateCompletedQuery, filterTasksByLabel } from './data/queries.js'
+import { getTable, saveTask, deleteTask, updateCompletedQuery, filterTasksByLabel, getTaskCountByLabel } from './data/queries.js'
 
 import './App.css'
 
@@ -17,6 +17,8 @@ function App() {
   const [storedTasks, setStoredTasks] = useState()
   const [dbTasks, setDbTasks] = useState([])
   let [totalTasks, setTotalTasks] = useState({})
+  const [visualTag, setVisualTag] = useState(null)
+  const [taskCounter, setTaskCounter] = useState()
 
   useEffect(() => {
     const loadTasks = async () => {
@@ -26,6 +28,7 @@ function App() {
             total: result.rows.length,
             completed: result.rows.filter(task => task.completed === 1).length // 👈
         })
+        await getTasksCounter()
     }
 
     loadTasks()
@@ -36,6 +39,7 @@ function App() {
     const result = await getTable()   
     setDbTasks(result.rows)
     setTotalTasks(prev => ({ ...prev, total: prev.total + 1 }))
+    await getTasksCounter()
   }
 
   async function deleteTaskFromlocal (taskId) {
@@ -43,6 +47,7 @@ function App() {
       const result = await getTable()
       setDbTasks(result.rows)
       setTotalTasks(prev => ({ ...prev, total: prev.total - 1 }))
+      await getTasksCounter()
   }
 
   const handleTaskSearching = (input) => {
@@ -70,10 +75,21 @@ function App() {
     setDbTasks(result.rows)   
   }
 
-  const getTasksByLabel = async (value) => {
+  const getTasksByLabel = async (value, isTagActive) => {
     const result = await filterTasksByLabel(value)
     setDbTasks(result.rows)
+    const tagParameters = [value, isTagActive]
+    setVisualTag([value, isTagActive])
   } 
+
+  const getTasksCounter = async () => {
+    const result = await getTaskCountByLabel()
+    const counts = Object.fromEntries(
+      result.rows.map(row => [row.label, row.count])
+    )
+
+    setTaskCounter(counts)
+  }
 
   return (
     <div className='app'>
@@ -82,6 +98,8 @@ function App() {
         tasks={filteredTasks}
         deleteTaskFromlocal={deleteTaskFromlocal}
         handleToggleCheck={handleToggleCheck}
+        getTasksByLabel={getTasksByLabel}
+        taskCounter={taskCounter}
       />
       <Main 
         useLocalStorage={useLocalStorage}
@@ -91,6 +109,7 @@ function App() {
         totalTasks={{ total: totalCount, completed: completedCount }}
         handleToggleCheck={handleToggleCheck}
         getTasksByLabel={getTasksByLabel}
+        setVisualTag={visualTag}
       />
     </div>
   )

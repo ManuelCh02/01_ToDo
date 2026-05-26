@@ -5,6 +5,12 @@
 .tasksListContainer {
     width: 100%;
 
+    & .taskListTitles {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
     & .tasksList {
         padding: 0;
         display: flex;
@@ -16,7 +22,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 8px;
-            padding: 16px;
+            padding: 4px 16px;
             background: var(--elevated-card);
             border-radius: 12px;
             font-family: inherit;

@@ -40,3 +40,12 @@ export const filterTasksByLabel = async (value) => {
         args: [`%${value}%`]
     })
 }
+
+export const getTaskCountByLabel = async () => {
+    return await client.execute(`
+        SELECT json_each.value as label, COUNT(*) as count
+        FROM todo_tasks, json_each(todo_tasks.labels)
+        WHERE todo_tasks.completed = 0
+        GROUP BY json_each.value 
+    `)
+}

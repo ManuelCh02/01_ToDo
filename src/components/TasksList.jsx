@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react"
 
 import { DeleteTask } from "./DeleteTask.jsx"
+import { VisualTag } from "./VisualTag.jsx"
 
 import styles from "../styles/TasksList.module.css"
 
-export function TasksList ({tasks, colors, deleteTaskFromlocal, handleTaskCounter, handleToggleCheck}) {
+export function TasksList ({tasks, colors, deleteTaskFromlocal, handleTaskCounter, handleToggleCheck, setVisualTag}) {
     const [taskToDelete, setTaskToDelete] = useState(null)
 
     return (
         <section className={styles.tasksListContainer}>
+            <div className={styles.taskListTitles}>
+                <h2>Inbox</h2>
+                <VisualTag 
+                    setVisualTag={setVisualTag}
+                />
+            </div>
             <ul className={styles.tasksList}>
                 {
                     (tasks || []).map(task => (

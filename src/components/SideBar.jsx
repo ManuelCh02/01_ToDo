@@ -8,7 +8,7 @@ import styles from "../styles/SideBar.module.css"
 
 export function SideBar ({handleTaskSearching, tasks, deleteTaskFromlocal, handleToggleCheck, getTasksByLabel, taskCounter}) {
     return (
-        <aside className={styles.asideContainer, "side-content"}>
+        <aside className={`${styles.asideContainer} side-content`}>
             <SearchTaskBar 
                 handleTaskSearching={handleTaskSearching}
             />
